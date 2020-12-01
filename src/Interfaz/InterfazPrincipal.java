@@ -423,7 +423,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         String nombreUsuario=jTextFieldRegistroUsuario.getText();
         String tipoEmpresa=comprobarSelecciondeCheckBox();
         String contraseña=String.valueOf(jPasswordFieldRegistro.getPassword());
-        System.out.println(correoIngresado);
         if(comprobarCorreoRegistro(correoIngresado)){
             if(noEspaciosEnBlanco(nombreUsuario) && noEspaciosEnBlanco(contraseña)){
                     Empresa emp=new Empresa(tipoEmpresa, correoIngresado, nombreUsuario, contraseña);
@@ -681,7 +680,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 /*
                 *Establecer la ruta de busqueda para verificaciones
                 */
-                System.err.println(this.getClass().getResourceAsStream("/dataBase/"+correo+"Usuarios.csv").toString());
                 pathUsers="..\\Muu-Seguro\\src\\dataBase\\"+correo+"Usuarios.csv";
                 /*
                 *Buscar el usuario EMPLEADO o VETERINARIO
