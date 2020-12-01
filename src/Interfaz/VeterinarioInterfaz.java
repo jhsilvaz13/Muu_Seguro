@@ -2,6 +2,9 @@ package Interfaz;
 
 import Mundo.Empresa;
 import Mundo.Veterinario;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 
 
@@ -132,7 +135,11 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
         });
         ButtonEnfermedad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonEnfermedadActionPerformed(evt);
+                try {
+                    ButtonEnfermedadActionPerformed(evt);
+                } catch (IOException ex) {
+                    Logger.getLogger(VeterinarioInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         jPanel1.add(ButtonEnfermedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 190, 32));
@@ -156,8 +163,12 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
         });
         ButtonMedica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //ButtonMedicButtonMedicaaActionPerformed(evt);
-                ButtonMedicaActionPerformed(evt);
+                try {
+                    //ButtonMedicButtonMedicaaActionPerformed(evt);
+                    ButtonMedicaActionPerformed(evt);
+                } catch (IOException ex) {
+                    Logger.getLogger(VeterinarioInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         jPanel1.add(ButtonMedica, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 190, 32));
@@ -244,7 +255,7 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ButtonEliminarActionPerformed
 
-    private void ButtonEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEnfermedadActionPerformed
+    private void ButtonEnfermedadActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_ButtonEnfermedadActionPerformed
         System.out.println("Entro a --> Ver enfermedades");
         // Se abre la ventana de Agregar / Eliminar Enfermedades
         AgregarEnfermedad enfermedadVentana = new AgregarEnfermedad (empresa,nombreUsuario);
@@ -253,7 +264,7 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
     }
     
 
-    private void ButtonMedicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAgregarActionPerformed
+    private void ButtonMedicaActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_ButtonAgregarActionPerformed
         System.out.println("Entro a ---> Agregar enfermedades");
         // Se abre la ventana de Agregar / Eliminar Medicamentos
         AgregarMedicamentos medicamentosVentana = new AgregarMedicamentos(empresa, nombreUsuario) ;

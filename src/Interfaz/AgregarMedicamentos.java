@@ -1,21 +1,31 @@
 package Interfaz;
 
+import Mundo.DatosAnimalesVeterinario;
 import Mundo.Empresa;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author MateoG404
  */
+
 public class AgregarMedicamentos extends javax.swing.JFrame {
     
-    Empresa empresa ;
+    Empresa empresa;
     String nombreUsuario;
+    DatosAnimalesVeterinario datos ;
     
-    public AgregarMedicamentos(Empresa empresa, String nombreUsuario) {
-        this.empresa = empresa;
+    public AgregarMedicamentos(Empresa empresa, String nombreUsuario) throws IOException{
+        this.empresa = empresa ;
         this.nombreUsuario = nombreUsuario;
-        initComponents();
+        DescripcionMedicamentos.setText("Ingrese el nombre");
+        // Creación de objeto de la clase DatosAnimalesVeterinario 
+        this.datos = new DatosAnimalesVeterinario(empresa.darCodigo());
+        
+        // Se añaden los nombre de los animales al ComBox
         
     }
 
@@ -38,7 +48,6 @@ public class AgregarMedicamentos extends javax.swing.JFrame {
         ComBoxAnimales = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         DescripcionMedicamentos = new javax.swing.JTextField();
-        DescripcionVitaminas = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         LabelPaso2 = new javax.swing.JLabel();
         NombreMedicamentos = new javax.swing.JTextField();
@@ -100,7 +109,6 @@ public class AgregarMedicamentos extends javax.swing.JFrame {
         jLabel5.setText("vitaminas");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, -1, -1));
 
-        ComBoxAnimales.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ComBoxAnimales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComBoxAnimalesActionPerformed(evt);
@@ -113,7 +121,7 @@ public class AgregarMedicamentos extends javax.swing.JFrame {
         jLabel6.setText("1.Seleccione el animal ");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, -1, -1));
 
-        DescripcionMedicamentos.setText("Describa la vitamina aquí");
+        DescripcionMedicamentos.setText("Describa los medicamentos aquí");
         DescripcionMedicamentos.enable(false);
         DescripcionMedicamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,15 +129,6 @@ public class AgregarMedicamentos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(DescripcionMedicamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 420, 120));
-
-        DescripcionVitaminas.setText("Describa el medicamento aquí");
-        DescripcionVitaminas.enable(false);
-        DescripcionVitaminas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DescripcionVitaminasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(DescripcionVitaminas, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, 420, 120));
 
         jButton1.setFont(new java.awt.Font("Bebas Neue", 0, 22)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 204));
@@ -173,7 +172,7 @@ public class AgregarMedicamentos extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/DataImage/fondomedicamentos.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/DataImage/fondomedicamentos.png"))); // NOI18N
         jLabel1.setToolTipText("");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, -1, -1));
 
@@ -200,13 +199,11 @@ public class AgregarMedicamentos extends javax.swing.JFrame {
             
         
         if(CheckVitaminas.isSelected()){
-            DescripcionVitaminas.enable(true);
-            NombreVitaminas.setVisible(true);
+                        NombreVitaminas.setVisible(true);
             
         }
         else{
-            DescripcionVitaminas.setText("Describa el medicamento aquí");
-            DescripcionVitaminas.enable(false);
+            
             NombreVitaminas.setVisible(false);
         }
             
@@ -231,7 +228,7 @@ public class AgregarMedicamentos extends javax.swing.JFrame {
     }//GEN-LAST:event_CheckMedicamentosActionPerformed
 
     private void DescripcionMedicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DescripcionMedicamentosActionPerformed
-        
+    
     }//GEN-LAST:event_DescripcionMedicamentosActionPerformed
 
     private void RadioButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonEliminarActionPerformed
@@ -248,10 +245,6 @@ public class AgregarMedicamentos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Primero debe seleccionar si desea agregar o eliminar");
             
     }//GEN-LAST:event_ComBoxAnimalesActionPerformed
-
-    private void DescripcionVitaminasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DescripcionVitaminasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DescripcionVitaminasActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -275,14 +268,24 @@ public class AgregarMedicamentos extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
+    public static void main(String args[]) {
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new AgregarMedicamentos(null,null).setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(AgregarMedicamentos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton CheckMedicamentos;
     private javax.swing.JRadioButton CheckVitaminas;
     private javax.swing.JComboBox<String> ComBoxAnimales;
     private javax.swing.JTextField DescripcionMedicamentos;
-    private javax.swing.JTextField DescripcionVitaminas;
     private javax.swing.JLabel LabelPaso2;
     private javax.swing.JTextField NombreMedicamentos;
     private javax.swing.JTextField NombreVitaminas;

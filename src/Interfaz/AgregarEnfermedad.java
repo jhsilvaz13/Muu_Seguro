@@ -2,13 +2,21 @@
 
 package Interfaz;
 
+
+import Mundo.DatosAnimalesVeterinario;
 import Mundo.Empresa;
+import static com.sun.xml.internal.ws.api.SOAPVersion.from;
 import java.awt.HeadlessException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,12 +26,14 @@ import javax.swing.JTextField;
 public class AgregarEnfermedad extends javax.swing.JFrame {
     Empresa empresa;
     String nombreUsuario;
+    DatosAnimalesVeterinario datos ;
+   
     public AgregarEnfermedad(JComboBox<String> ComBoxAnimal, JButton Guardar, JTextField TextDescripcion, JRadioButton agregarboton, JComboBox<String> comBoxEnfermedad, JRadioButton eliminarBoton, JButton jButton1, JLabel jLabel1, JLabel jLabel2, JLabel jLabel3, JLabel jLabel4, JLabel jLabel5, JTextField textEnfermedad) throws HeadlessException {
         this.ComBoxAnimal = ComBoxAnimal;
         this.Guardar = Guardar;
         this.TextDescripcion = TextDescripcion;
         this.agregarboton = agregarboton;
-        this.comBoxEnfermedad = comBoxEnfermedad;
+        
         this.eliminarBoton = eliminarBoton;
         this.jButton1 = jButton1;
         this.jLabel1 = jLabel1;
@@ -34,16 +44,43 @@ public class AgregarEnfermedad extends javax.swing.JFrame {
         this.textEnfermedad = textEnfermedad;
     }
             
-    public AgregarEnfermedad(Empresa empresa, String nombreUsuario) {
+    public AgregarEnfermedad(Empresa empresa, String nombreUsuario) throws IOException {
         initComponents();
+        
         this.empresa = empresa ;
         this.nombreUsuario = nombreUsuario;
+        textEnfermedad.setText("Ingrese el nombre");
+        // Creación de objeto de la clase DatosAnimalesVeterinario 
+        this.datos = new DatosAnimalesVeterinario(empresa.darCodigo());
         
-        comBoxEnfermedad.setVisible(false);
-        textEnfermedad.setVisible(false);
-       
+        // Se añaden los nombre de los animales al ComBox
+        addComBox();
+        
+        
+        
     }
-
+    public void addComBox() throws IOException{
+        ArrayList<String> listaAnimales = datos.LecturaAnimales();
+        
+        for (int i = 0 ; i < (listaAnimales.size()); i++){
+            ComBoxAnimal.addItem(listaAnimales.get(i));
+        }
+    }
+    
+    public String getEnfermedad(String seleccion){
+        // Se pone en el comBoxEnfermedad el nombre de las enfermedades
+        
+        
+        ArrayList<String> enfermedades = datos.LecturaEnfermedades();
+        System.out.println("Seleccion --->" + seleccion);
+        String enfermedad = "";
+        
+        for (int i = 0 ; i < (enfermedades.size()) ;i+=2 ){
+            if(seleccion.equals(enfermedades.get(i) ) )
+                enfermedad = enfermedades.get(i+1);
+        }
+        return enfermedad;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -55,7 +92,6 @@ public class AgregarEnfermedad extends javax.swing.JFrame {
         ComBoxAnimal = new javax.swing.JComboBox<>();
         eliminarBoton = new javax.swing.JRadioButton();
         agregarboton = new javax.swing.JRadioButton();
-        comBoxEnfermedad = new javax.swing.JComboBox<>();
         textEnfermedad = new javax.swing.JTextField();
         Guardar = new javax.swing.JButton();
         TextDescripcion = new javax.swing.JTextField();
@@ -112,15 +148,7 @@ public class AgregarEnfermedad extends javax.swing.JFrame {
             }
         });
         getContentPane().add(agregarboton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 210, -1, -1));
-
-        comBoxEnfermedad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comBoxEnfermedad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comBoxEnfermedadActionPerformed(evt);
-            }
-        });
-        getContentPane().add(comBoxEnfermedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 260, 100, 30));
-        getContentPane().add(textEnfermedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 260, 140, 30));
+        getContentPane().add(textEnfermedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 260, 160, 30));
 
         Guardar.setText("Guardar");
         Guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -157,33 +185,46 @@ public class AgregarEnfermedad extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComBoxAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComBoxAnimalActionPerformed
-        // TODO add your handling code here:
+        // Se muestran todos los animales registrados en la empresa. De la forma Nombre - #registro
     }//GEN-LAST:event_ComBoxAnimalActionPerformed
 
     private void eliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBotonActionPerformed
        System.out.println(evt.getActionCommand());
-       comBoxEnfermedad.setVisible(true);
-       textEnfermedad.setVisible(false);
+       // Se poné en el textEnfermedad la enfermedad que esta registrada para cada animal 
+       
+       textEnfermedad.setText(getEnfermedad(ComBoxAnimal.getSelectedItem().toString()));
+       textEnfermedad.enable(false);
        agregarboton.setSelected(false);
        TextDescripcion.enable(true);
     }//GEN-LAST:event_eliminarBotonActionPerformed
 
     private void agregarbotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarbotonActionPerformed
         // Se oculta el combox pues el usuario debe colocar el nombre de la enfermedad 
-        comBoxEnfermedad.setVisible(false);
-        textEnfermedad.setVisible(true);
+        
+        textEnfermedad.setText("Ingrese el nombre");
         eliminarBoton.setSelected(false);
         TextDescripcion.enable(true);
     }//GEN-LAST:event_agregarbotonActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        String textoDescripcion = TextDescripcion.getText();
-        System.out.println(textoDescripcion);
+        
+        if (agregarboton.isSelected()){
+            try {
+                String texto = textEnfermedad.getText() +">"+ TextDescripcion.getText(); // Texto -> nombreEnfermedad -> Descripcion
+                datos.agregar(ComBoxAnimal.getSelectedItem().toString(),texto,true);
+                JOptionPane.showMessageDialog(null,"Agregado con exito");
+            } catch (IOException ex) {
+                Logger.getLogger(AgregarEnfermedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                datos.eliminar(ComBoxAnimal.getSelectedItem().toString(),TextDescripcion.getText(),true);
+            } catch (IOException ex) {
+                Logger.getLogger(AgregarEnfermedad.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     }//GEN-LAST:event_GuardarActionPerformed
-
-    private void comBoxEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comBoxEnfermedadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comBoxEnfermedadActionPerformed
 
     private void TextDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextDescripcionActionPerformed
         
@@ -199,12 +240,24 @@ public class AgregarEnfermedad extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public static void main(String args[]) {
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new AgregarEnfermedad(null,null).setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(AgregarEnfermedad.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComBoxAnimal;
     private javax.swing.JButton Guardar;
     private javax.swing.JTextField TextDescripcion;
     private javax.swing.JRadioButton agregarboton;
-    private javax.swing.JComboBox<String> comBoxEnfermedad;
     private javax.swing.JRadioButton eliminarBoton;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
