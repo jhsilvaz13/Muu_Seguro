@@ -1,0 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Mundo;
+
+/**
+ *
+ * @author John Silva
+ */
+public class Lote {
+    
+   private int numero; 
+   private String razaLote;
+   private String calidadPasto;
+   private String agua; 
+   private int X;
+   private int Y;
+   
+   public Lote(int nNumero, String nRazaLote, String nCalidadPasto, String nAgua, int x, int y){
+        numero=nNumero;
+        razaLote=nRazaLote;
+        calidadPasto=nCalidadPasto;
+        agua=nAgua;
+        X=x;
+        Y=y;
+   }
+   public int darNumero(){
+       return numero;
+   }
+   public String darRazaLote(){
+       return razaLote;
+   }
+   public String darCalidad(){
+       return calidadPasto;
+   }
+   public String darAgua(){
+       return agua;
+   }
+   public int darX(){
+       return X;
+   }
+   public int darY(){
+       return Y;
+   }
+}
