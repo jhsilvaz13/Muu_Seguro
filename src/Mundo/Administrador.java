@@ -78,8 +78,7 @@ public class Administrador {
     *Arreglo Terneros
     */
     private ArrayList<Ternero> terneros=new ArrayList<Ternero>();
-    
-    
+       
     /*
     *Arreglo lotes
     */

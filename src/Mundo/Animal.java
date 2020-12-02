@@ -8,7 +8,7 @@ import java.util.Arrays;
  *
  * @author John Silva
  */
-public class Animal {
+public abstract class Animal {
     /*
     *
     */

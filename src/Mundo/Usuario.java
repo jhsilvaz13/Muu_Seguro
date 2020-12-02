@@ -4,7 +4,7 @@ package Mundo;
  *
  * @author John Silva
  */
-public class Usuario {
+public abstract class Usuario {
     /*
     *Salario empleado
     */
