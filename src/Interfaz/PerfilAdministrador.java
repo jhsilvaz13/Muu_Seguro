@@ -11,6 +11,14 @@ import javax.swing.JOptionPane;
 public class PerfilAdministrador extends javax.swing.JFrame {
 
     /**
+     * @param args the command line arguments
+     */
+    private Empresa empresa;
+    private Administrador admin;
+    private int counter = 0;
+    private boolean modificable = false;
+    
+    /**
      * Creates new form PerfilAdministrador
      */
     public PerfilAdministrador(Empresa var) {
@@ -50,7 +58,6 @@ public class PerfilAdministrador extends javax.swing.JFrame {
         jTextFieldAuxiliar = new javax.swing.JTextField();
         jToggleButtonModificar = new javax.swing.JToggleButton();
         jComboBoxTipoEmpresa = new javax.swing.JComboBox<>();
-        jButtonEliminarEmpresa = new javax.swing.JButton();
         jButtonRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -223,24 +230,6 @@ public class PerfilAdministrador extends javax.swing.JFrame {
         jComboBoxTipoEmpresa.setFocusable(false);
         jPanelPrincipalPerfil.add(jComboBoxTipoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 255, 200, 30));
 
-        jButtonEliminarEmpresa.setBackground(new java.awt.Color(104, 191, 52));
-        jButtonEliminarEmpresa.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jButtonEliminarEmpresa.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonEliminarEmpresa.setText("Eliminar empresa");
-        jButtonEliminarEmpresa.setBorder(null);
-        jButtonEliminarEmpresa.setBorderPainted(false);
-        jButtonEliminarEmpresa.setContentAreaFilled(false);
-        jButtonEliminarEmpresa.setOpaque(true);
-        jButtonEliminarEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonEliminarEmpresaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonEliminarEmpresaMouseExited(evt);
-            }
-        });
-        jPanelPrincipalPerfil.add(jButtonEliminarEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 430, 140, 30));
-
         jButtonRegresar.setBackground(new java.awt.Color(104, 191, 52));
         jButtonRegresar.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButtonRegresar.setForeground(new java.awt.Color(255, 255, 255));
@@ -339,23 +328,7 @@ public class PerfilAdministrador extends javax.swing.JFrame {
         jButtonRegresar.setBackground(new java.awt.Color(104, 191, 52));
     }//GEN-LAST:event_jButtonRegresarMouseExited
     
-    private void jButtonEliminarEmpresaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEliminarEmpresaMouseEntered
-        // TODO add your handling code here:
-        jButtonEliminarEmpresa.setBackground(new java.awt.Color(255, 0, 0));
-    }//GEN-LAST:event_jButtonEliminarEmpresaMouseEntered
-
-    private void jButtonEliminarEmpresaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEliminarEmpresaMouseExited
-        // TODO add your handling code here:
-        jButtonEliminarEmpresa.setBackground(new java.awt.Color(104, 191, 52));
-    }//GEN-LAST:event_jButtonEliminarEmpresaMouseExited
-
-    /**
-     * @param args the command line arguments
-     */
-    private Empresa empresa;
-    private Administrador admin;
-    private int counter = 0;
-    private boolean modificable = false;
+    
 
     private void verContraseña() {
         if (counter % 2 != 0) {
@@ -369,7 +342,6 @@ public class PerfilAdministrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonEliminarEmpresa;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JButton jButtonVerContraseña;
     private javax.swing.JComboBox<String> jComboBoxTipoEmpresa;

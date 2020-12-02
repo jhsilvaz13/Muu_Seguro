@@ -8,12 +8,20 @@ import Mundo.Veterinario;
  * @author John Silva
  */
 public class PerfilVeterinarios extends javax.swing.JFrame {
-
+    
+    /**
+     * @param args the command line arguments
+     */
+    private int counter = 0;
+    private boolean modificable = false;
+    private Empresa empresa;
+    private Veterinario veterinario;
+    
+    
     /** Creates new form PerfilVeterinarios */
     public PerfilVeterinarios(Empresa emp,Veterinario vet) {
         empresa=emp;
         veterinario=vet;
-       
         initComponents();
     }
 
@@ -297,14 +305,7 @@ public class PerfilVeterinarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    private int counter = 0;
-    private boolean modificable = false;
-    private Empresa empresa;
-    private Veterinario veterinario;
-    String codigoEmp;
+    
     
     private void verContraseña() {
         if (counter % 2 != 0) {

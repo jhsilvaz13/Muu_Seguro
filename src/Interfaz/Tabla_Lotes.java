@@ -24,7 +24,6 @@ public class Tabla_Lotes extends javax.swing.JFrame{
         setTitle("Muu Seguro");
         setResizable(false);
         contenedorPrincipal.setLayout(new java.awt.GridBagLayout());
-        //Scanner sc= new Scanner(System.in);
         int widht= w;
         int height= h;
                //para el widht
@@ -80,7 +79,6 @@ public class Tabla_Lotes extends javax.swing.JFrame{
         setLocationRelativeTo(null);  
         if(ver){
             setVisible(true); 
-            System.out.print("Yeahhh");
         }
         pack();
         
@@ -101,11 +99,6 @@ class CellPane extends javax.swing.JPanel{
         empresa=emp;
         this.x=x;
         this.y=y;
-        System.err.println(registrados.size());
-        for(int i=0; i<registrados.size();i++){
-            System.out.println("Now:"+registrados.get(i));
-        }
-        System.out.println();
         for(int i=0; i<registrados.size();i++){
             if((this.x+"-"+this.y).equals(registrados.get(i))){
                 setBackground(new java.awt.Color(104,191,52));
@@ -129,7 +122,6 @@ class CellPane extends javax.swing.JPanel{
                     String[] valores = linea.split(",");//arreglo de las columnas de cada linea
                     String coordenadas;   
                     coordenadas=valores[4]+"-"+valores[5];
-                    System.err.println("Coordenadas: "+coordenadas);
                     registrados.add(coordenadas);                    
                 }
             }
@@ -140,12 +132,10 @@ class CellPane extends javax.swing.JPanel{
     
     private void panelMouseClicked(java.awt.event.MouseEvent ev, Interfaz.Registros ventanaRegistros,javax.swing.JFrame ventanaContenedor, boolean call){
         //this.ventanaRegistros=ventanaRegistros;
-        System.out.println("COLOR: "+this.getBackground().getRGB());
         if(this.getBackground().getRGB()==-2696737 && call){
             defaultBackground = getBackground();
             setBackground(new java.awt.Color(104,191,52));
             if (JOptionPane.showConfirmDialog(null, "¿Está seguro de seleccionar la ubicación?", "WARNING",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {  
-                    System.out.println(this.x+"*"+this.y);
                     ventanaRegistros.xValueLote=this.x;
                     ventanaRegistros.yValueLote=this.y;
                     //ventanaRegistros.setEnabled(true);
@@ -157,8 +147,7 @@ class CellPane extends javax.swing.JPanel{
             if(this.getBackground().getRGB()!=-2696737){
                 String message="";
                 for(int i=0; i<empresa.darAdmin().darArregloLote().size();i++){
-                    System.err.println("Lote selec:"+ this.x +","+this.y 
-                            +"and"+empresa.darAdmin().darArregloLote().get(i).darX()+","+empresa.darAdmin().darArregloLote().get(i).darY());
+                    
                     if(empresa.darAdmin().darArregloLote().get(i).darX()==this.x && 
                        empresa.darAdmin().darArregloLote().get(i).darY()==this.y){
                        message+="Lote: "+ empresa.darAdmin().darArregloLote().get(i).darNumero()+"\n"

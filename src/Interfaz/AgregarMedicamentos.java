@@ -265,21 +265,6 @@ public class AgregarMedicamentos extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new AgregarMedicamentos(null,null).setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(AgregarMedicamentos.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton CheckMedicamentos;

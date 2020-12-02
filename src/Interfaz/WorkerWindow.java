@@ -20,7 +20,6 @@ public class WorkerWindow extends javax.swing.JFrame {
    // Create Objects //
     Empresa empresa ;
     Empleado empleado;
-    FunctionsClass ven = new FunctionsClass(1);
     Tabla_Lotes panelMapa;
     
     // Constructor
@@ -295,7 +294,9 @@ public class WorkerWindow extends javax.swing.JFrame {
     }                                     
 
     private void BSearch1ActionPerformed(java.awt.event.ActionEvent evt) { 
-       
+        SearchWindow ventana= new SearchWindow(empresa,empleado.darNombre());
+        this.setVisible(false);
+        ventana.setVisible(true);
     }                                        
 
     private void CBSetCActionPerformed(java.awt.event.ActionEvent evt) {                                       
@@ -371,8 +372,14 @@ public class WorkerWindow extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Ups! Algo salió mal, inténtelo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
                 System.out.println(ex.toString());     
         }
-        for(int i=0;i<valores.length;i++){
-            valoresTamaño[i]=Integer.parseInt(valores[i]);
+        if(valores[0]!=null){
+            for(int i=0;i<valores.length;i++){
+                valoresTamaño[i]=Integer.parseInt(valores[i]);
+            }
+        }else{
+            for(int i=0;i<valores.length;i++){
+                valoresTamaño[i]=0;
+            }
         }
         return valoresTamaño;
     }
@@ -393,7 +400,6 @@ public class WorkerWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelImageSouth;
     private javax.swing.JLabel jLabelImageWest;
     private javax.swing.JLabel jLabelImageEast;
-     
     private javax.swing.JPanel fond;
     private javax.swing.JPanel contenedorMapa; 
     private javax.swing.JPanel mapa;  

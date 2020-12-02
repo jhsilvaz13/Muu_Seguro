@@ -15,7 +15,15 @@ import javax.swing.JOptionPane;
  * @author John Silva
  */
 public class PerfilTrabajador extends javax.swing.JFrame {
-
+    
+    /**
+     * @param args the command line arguments
+     */
+    private int counter = 0;
+    private boolean modificable = false;
+    private Empresa empresa;
+    private Empleado trabajador;
+    
     /** Creates new form PerfilTrabajador */
     public PerfilTrabajador(Empresa emp, String nombreUsuario){
         empresa=emp;
@@ -306,13 +314,7 @@ public class PerfilTrabajador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    private int counter = 0;
-    private boolean modificable = false;
-    private Empresa empresa;
-    private Empleado trabajador;
+    
     private void verContraseña() {
         if (counter % 2 != 0) {
             jPasswordFieldContraseña.setVisible(false);

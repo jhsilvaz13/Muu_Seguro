@@ -28,22 +28,7 @@ public class AgregarEnfermedad extends javax.swing.JFrame {
     String nombreUsuario;
     DatosAnimalesVeterinario datos ;
    
-    public AgregarEnfermedad(JComboBox<String> ComBoxAnimal, JButton Guardar, JTextField TextDescripcion, JRadioButton agregarboton, JComboBox<String> comBoxEnfermedad, JRadioButton eliminarBoton, JButton jButton1, JLabel jLabel1, JLabel jLabel2, JLabel jLabel3, JLabel jLabel4, JLabel jLabel5, JTextField textEnfermedad) throws HeadlessException {
-        this.ComBoxAnimal = ComBoxAnimal;
-        this.Guardar = Guardar;
-        this.TextDescripcion = TextDescripcion;
-        this.agregarboton = agregarboton;
-        
-        this.eliminarBoton = eliminarBoton;
-        this.jButton1 = jButton1;
-        this.jLabel1 = jLabel1;
-        this.jLabel2 = jLabel2;
-        this.jLabel3 = jLabel3;
-        this.jLabel4 = jLabel4;
-        this.jLabel5 = jLabel5;
-        this.textEnfermedad = textEnfermedad;
-    }
-            
+
     public AgregarEnfermedad(Empresa empresa, String nombreUsuario) throws IOException {
         initComponents();
         
@@ -55,7 +40,7 @@ public class AgregarEnfermedad extends javax.swing.JFrame {
         
         // Se añaden los nombre de los animales al ComBox
         addComBox();
-        
+         
         
         
     }
@@ -69,7 +54,6 @@ public class AgregarEnfermedad extends javax.swing.JFrame {
     
     public String getEnfermedad(String seleccion){
         // Se pone en el comBoxEnfermedad el nombre de las enfermedades
-        
         
         ArrayList<String> enfermedades = datos.LecturaEnfermedades();
         System.out.println("Seleccion --->" + seleccion);
@@ -240,18 +224,6 @@ public class AgregarEnfermedad extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public static void main(String args[]) {
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new AgregarEnfermedad(null,null).setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(AgregarEnfermedad.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComBoxAnimal;

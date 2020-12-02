@@ -18,15 +18,12 @@ import java.util.ArrayList ;
 
 public class SearchWindow extends javax.swing.JFrame {
     //Data Members 
-    int value ;
     Empresa empresa; 
-    FunctionsClass ven = new FunctionsClass(value);
-    
-    public SearchWindow(int value, Empresa emp) {
+    String nombre;
+    public SearchWindow(Empresa emp, String nombreUsua) {
         empresa=emp;
+        nombre=nombreUsua;
         initComponents();
-        this.value = value ;
-
     }
 
 
@@ -120,6 +117,11 @@ public class SearchWindow extends javax.swing.JFrame {
         jRadioButtonUsuarios.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jRadioButtonUsuarios.setText("Usuarios");
         jRadioButtonUsuarios.setContentAreaFilled(false);
+        if(nombre.equals("")){
+           jRadioButtonUsuarios.setEnabled(true);
+        }else{
+           jRadioButtonUsuarios.setEnabled(false);
+        }
         jRadioButtonUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonUsuariosActionPerformed(evt);
@@ -241,7 +243,6 @@ public class SearchWindow extends javax.swing.JFrame {
                     }
 
                     String[][] filas=new String[filasTemp.size()][10];
-                    System.err.println("Tamaño:"+filasTemp.size());
                     for(int i=0; i<filasTemp.size();i++){
                         for(int j=0; j<filasTemp.get(0).length;j++){
                             filas[i][j]=filasTemp.get(i)[j];
@@ -386,11 +387,14 @@ public class SearchWindow extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void RegresarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        try {
-            ven.BackProgramm(value, empresa);
-            dispose();
-        } catch (Exception ex) {
-            Logger.getLogger(SearchWindow.class.getName()).log(Level.SEVERE, null, ex);
+        if(nombre.length()==0){
+            Ventana vent=new Ventana(empresa);
+            this.setVisible(false);
+            vent.setVisible(true);
+        }else{
+            WorkerWindow vent=new WorkerWindow(empresa, nombre);
+            this.setVisible(false);
+            vent.setVisible(true);
         }
     }                                              
                                       
@@ -460,7 +464,6 @@ public class SearchWindow extends javax.swing.JFrame {
             }    
             
             String[][] filas=new String[filasTemp.size()][10];
-            System.err.println("Tamaño:"+filasTemp.size());
             for(int i=0; i<filasTemp.size();i++){
                 for(int j=0; j<filasTemp.get(0).length;j++){
                     filas[i][j]=filasTemp.get(i)[j];
@@ -549,16 +552,16 @@ public class SearchWindow extends javax.swing.JFrame {
         jPanelTablas.add(jScrollPaneAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 395));
     }
     
-    private void jRadioButtonUsuariosActionPerformed(java.awt.event.ActionEvent evt){
-        jTextFieldBuscarAnimal.setVisible(false); 
-        jTextFieldBuscarUsuario.setVisible(true);
-        jTextFieldBuscarLote.setVisible(false);
-        jLabelAnimal.setVisible(false);
-        jLabelUsuario.setVisible(true);
-        jLabelLotes.setVisible(false);
-        jPanelTablas.removeAll();
-        jPanelTablas.repaint();
-        jPanelTablas.add(jScrollPaneUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 395));
+    private void jRadioButtonUsuariosActionPerformed(java.awt.event.ActionEvent evt){  
+            jTextFieldBuscarAnimal.setVisible(false); 
+            jTextFieldBuscarUsuario.setVisible(true);
+            jTextFieldBuscarLote.setVisible(false);
+            jLabelAnimal.setVisible(false);
+            jLabelUsuario.setVisible(true);
+            jLabelLotes.setVisible(false);
+            jPanelTablas.removeAll();
+            jPanelTablas.repaint();
+            jPanelTablas.add(jScrollPaneUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 395));   
     }
     
     private void jRadioButtonLotesActionPerformed(java.awt.event.ActionEvent evt){

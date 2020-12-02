@@ -16,7 +16,6 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
     // Create the objects 
     Empresa empresa ;
     Veterinario veterinario;
-    FunctionsClass ven = new FunctionsClass(3) ; 
     String nombreUsuario; 
     
     public VeterinarioInterfaz(Empresa empresa, String nombreUsuario){

@@ -29,7 +29,6 @@ public class Ventana extends javax.swing.JFrame {
     
    
     Empresa empresa;
-    FunctionsClass ven=new FunctionsClass(1);
     Administrador admin;
     
     //                  Methods                 //
@@ -399,8 +398,9 @@ public class Ventana extends javax.swing.JFrame {
 
     private void BSearchActionPerformed(java.awt.event.ActionEvent evt) {                                        
        // Ventana para buscar
-        ven.SearchProgramm(empresa);
-        dispose();      
+        SearchWindow ventana= new SearchWindow(empresa,"");
+        this.setVisible(false);
+        ventana.setVisible(true);
     }                                       
     private String darCodigoEmpresa(){
         return empresa.darCodigo();
@@ -431,10 +431,7 @@ public class Ventana extends javax.swing.JFrame {
          this.setVisible(false);
          ventanaRegistros.setVisible(true);
     }                                         
-
-    private void BSet1ActionPerformed(java.awt.event.ActionEvent evt) {                                      
-        System.out.println("Ventana de eliminar ");
-    }                                     
+                                   
 
 
     // Variables declaration - do not modify                     

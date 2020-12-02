@@ -29,6 +29,16 @@ import java.util.Date;
  * @author John Silva and Laura Ardila
  */
 public class Registros extends javax.swing.JFrame {
+     
+    /*
+    *contador para ver contraseñas
+    */
+    private int counter;
+    /*
+    *Empresa
+    */
+    private Empresa empresa;
+    
     
     /**
      * Creates new form Registros
@@ -778,7 +788,7 @@ public class Registros extends javax.swing.JFrame {
                         jTextFieldCoordenadasKeyPressed(evt,y);
                     }
                 });
-                Object[] mensaje = {"Ingresa el tamaño relativo de la finca","Ancho(Km): ", x,"Alto(Km): ", y};
+                Object[] mensaje = {"Ingresa el tamaño relativo de la finca","Ancho(mt): ", x,"Alto(mt): ", y};
                 int select = JOptionPane.showConfirmDialog(null, mensaje, "Tamaño finca", JOptionPane.OK_CANCEL_OPTION);
                 if (select == JOptionPane.OK_OPTION) {
                     registrarTamañoFinca(x.getText(),y.getText(),pathLot);
@@ -796,7 +806,7 @@ public class Registros extends javax.swing.JFrame {
         }catch(IOException ex){
                 JOptionPane.showMessageDialog(null, "Ups! Algo salió mal, inténtelo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButtonIrAPanelLoteActionPerformed
+    }
     /*
     *Eventos para evitar el ingreso de comas
     */
@@ -950,7 +960,6 @@ public class Registros extends javax.swing.JFrame {
         }
         String peso=jTextFieldPesoAnimal.getText();
         String numCrias=calcularNumeroDeCrias();
-        System.out.println(numCrias);
         
         String cantidadCarne;
         String cantidadLeche;
@@ -1099,18 +1108,7 @@ public class Registros extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    /*
-    *Objeto para tener textFields con contenido presdeterminad
-    */
-    private PlaceHolder holder;
-    /*
-    *contador para ver contraseñas
-    */
-    private int counter;
-    /*
-    *Empresa
-    */
-    private Empresa empresa;
+  
     
     public static int xValueLote=-1;
     public static int yValueLote=-1;    
@@ -1265,7 +1263,6 @@ public class Registros extends javax.swing.JFrame {
     private String calcularNumeroDeCrias(){
         if(jRadioButtonCriasSI.isSelected()){
             if(noEspaciosEnBlanco(jTextFieldCrias.getText())){
-                System.err.println(jTextFieldCrias.getText()+"Now");
                 String []numerosSerie=jTextFieldCrias.getText().split(",");
                 int aux=0;
                 for(int i=0; i<numerosSerie.length; i++){
@@ -1289,7 +1286,6 @@ public class Registros extends javax.swing.JFrame {
     private int calcularEdad(){
         LocalDate fechaNacimiento = LocalDate.parse(new SimpleDateFormat("dd/MM/yyyy").format(jDateChooserFechaNacimiento.getDate()), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         Period periodo = Period.between(fechaNacimiento,LocalDate.now());
-        System.err.println("Edad en meseS:"+periodo.getYears());
         return periodo.getYears();
     }
     
@@ -1325,8 +1321,7 @@ public class Registros extends javax.swing.JFrame {
                 }
             }
             }catch(Exception ex){
-                JOptionPane.showMessageDialog(null, "Ups! Algo salió mal, inténtelo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
-                System.out.println(ex.toString());     
+                JOptionPane.showMessageDialog(null, "Ups! Algo salió mal, inténtelo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);    
         }
         for(int i=0;i<valores.length;i++){
             valoresTamaño[i]=Integer.parseInt(valores[i]);
@@ -1429,6 +1424,7 @@ public class Registros extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNumeroRegistro;
     private javax.swing.JTextField jTextFieldPesoAnimal;
     private javax.swing.JTextField jTextFieldCrias;
+    private PlaceHolder holder;
     private Tabla_Lotes tab;
 
     // End of variables declaration//GEN-END:variables
