@@ -13,6 +13,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -154,7 +156,6 @@ public class DatosAnimalesVeterinario {
         archivoEscritura.close();
     
     }
-    
     
     // Se agrega la enfermedad o enfermedad
     public void agregar(String seleccion, String texto, boolean band) throws IOException{
@@ -300,51 +301,80 @@ public class DatosAnimalesVeterinario {
         // Lectura del archivo enfermedadAnimales
         BufferedReader br1 = new BufferedReader(new FileReader(PATH));
         String line = "" ; 
+        
         while ( (line = br1.readLine()) != null){
             String [] values = line.split(",");
-            if (values[5].equals("Enfermedad no registra") && values[2].equals("Vaca"))
+            
+            
+            if ((values[5].toString()).equals("  Enfermedad no registra ") && values[2].equals("  Vaca "))
                 this.CantidadVacasSanas ++;
-            else if (values[5] != ("Enfermedad no registra") && values[2].equals("Vaca"))
+            else if ((values[5].toString()) != ("  Enfermedad no registra ") && values[2].equals("  Vaca "))
                 this.CantidadVacasEnfermas ++ ;
-            else if (values[5].equals("Enfermedad no registra") && values[2].equals("Toro"))
+            else if ((values[5].toString()).equals("  Enfermedad no registra ") && values[2].equals("  Toro "))
                 this.CantidadTorosSanos ++;
-            else if ((values[5] != ("Enfermedad no registra") && values[2].equals("Toro")))
+            else if ((values[5].toString() != "  Enfermedad no registra " )&& values[2].equals("  Toro "))
                 this.CantidadTorosEnfermos ++ ;   
+
         }
         br1.close();
         this.CantidadAnimalesEnfermos = this.CantidadTorosEnfermos + this.CantidadVacasEnfermas ;
-        this.CantidadAnimalesEnfermos = this.CantidadTorosSanos + this.CantidadVacasSanas ;
+        this.CantidadAnimalesSanos = this.CantidadTorosSanos + this.CantidadVacasSanas ;
     }
     
-    public int getVacasEnfermas() throws IOException{
-       ContarSalubridad();
-       return CantidadVacasEnfermas;
-    }
+    // Método para obtener la cantidad de cada tipo Enfermo - Sano 
+    public int getQuantityAnimals(String escogido) {
+        int valor = 0;
+        this.CantidadVacasEnfermas = 0; 
+        this.CantidadVacasSanas = 0; 
+        this.CantidadTorosSanos = 0; 
+        this.CantidadTorosEnfermos = 0; 
+        this.CantidadAnimalesSanos = 0; 
+        this.CantidadAnimalesEnfermos = 0; 
+        try {
+            ContarSalubridad();
+           
+            System.out.println("Entroo");
+            if (escogido.equals("Animales Sanos"))
+                return CantidadAnimalesSanos;
+            else if (escogido.equals("Animales Enfermos"))
+                return CantidadAnimalesEnfermos;
+            else if (escogido.equals("Vaca Sana")){
+                System.out.println("heree");
+                return CantidadVacasSanas;
+            }
+            else if (escogido.equals("Vaca Enferma"))
+                return CantidadVacasEnfermas;
+            else if (escogido.equals("Toro Sano"))
+                return CantidadTorosSanos;
+            else if (escogido.equals("Toro Enfermo"))
+                return CantidadTorosEnfermos;
+            else
+                return valor ;
+        } catch (IOException ex) {
+            Logger.getLogger(DatosAnimalesVeterinario.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        return valor ;
+        
+    } 
     
-    public int getVacasSanas() throws IOException{
-       ContarSalubridad();
-       return CantidadVacasSanas;
+    public String getSexo(String seleccion) throws IOException, FileNotFoundException{
+        int indice = seleccion.indexOf('-');
+        String texto = seleccion.substring(indice+2);
+        
+        System.out.println("texto -->" +  texto);
+        // Se lee el archivo de animales y se busca el número de registro de la vaca
+        BufferedReader br1 = new BufferedReader(new FileReader(PATH));
+        String line = ""; 
+        while ( (line = br1.readLine()) != null ){
+            String [] values = line.split(",");
+            System.out.println("-->" + Arrays.toString(values));
+            if (values[0].equals(texto))
+                // Se retorna el sexo 
+                return values[3];
+        } 
+        
+        
+        return "";
     }
-    
-    public int getTorosSanos() throws IOException{
-        ContarSalubridad();
-        return CantidadTorosSanos;
-    }
-    
-    public int getTorosEnfermos() throws IOException{
-        ContarSalubridad();
-        return CantidadTorosEnfermos;
-    }
-    
-    public int getAnimalesSanos() throws IOException{
-        ContarSalubridad();
-        return CantidadAnimalesSanos;
-    }
-    
-    public int getAnimalesEnfermos() throws IOException{
-        ContarSalubridad();
-        return CantidadAnimalesEnfermos;
-
-    }
-    
 }

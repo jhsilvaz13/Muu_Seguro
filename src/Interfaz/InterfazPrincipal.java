@@ -17,6 +17,8 @@ import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -166,7 +168,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jButtonIniciarSesión.setMargin(new java.awt.Insets(100, 2, 100, 14));
         jButtonIniciarSesión.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIniciarSesiónActionPerformed(evt);
+                try {
+                    jButtonIniciarSesiónActionPerformed(evt);
+                } catch (IOException ex) {
+                    Logger.getLogger(InterfazPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         jPanelIniciarSesión.add(jButtonIniciarSesión, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 380, 329, 32));
@@ -397,7 +403,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     /*
     *Boton INICIAR SESIÓN 
     */
-    private void jButtonIniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jButtonIniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
         // TODO add your handling code here:
         String codigoEmp=jTextFieldInicioCodigoEmp.getText();
         String nombreUsuario=jTextFieldNombreUsuarioInicio.getText();

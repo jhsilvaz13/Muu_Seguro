@@ -5,7 +5,6 @@ package Interfaz;
 
 import Mundo.DatosAnimalesVeterinario;
 import Mundo.Empresa;
-import static com.sun.xml.internal.ws.api.SOAPVersion.from;
 import java.awt.HeadlessException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -217,9 +216,15 @@ public class AgregarEnfermedad extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Se devuelve a la ventana principal
-        VeterinarioInterfaz veterinarioVentana = new VeterinarioInterfaz(empresa, nombreUsuario);
-        veterinarioVentana.setVisible(true);
-        this.setVisible(false);
+        VeterinarioInterfaz veterinarioVentana;
+        try {
+            veterinarioVentana = new VeterinarioInterfaz(empresa, nombreUsuario);
+            veterinarioVentana.setVisible(true);
+            this.setVisible(false);
+        } catch (IOException ex) {
+            Logger.getLogger(AgregarEnfermedad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         
     }//GEN-LAST:event_jButton1ActionPerformed

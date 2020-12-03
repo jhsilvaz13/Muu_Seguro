@@ -1,7 +1,11 @@
 package Interfaz;
 
+import Mundo.DatosAnimalesVeterinario;
 import Mundo.Empresa;
 import Mundo.Veterinario;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,16 +21,29 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
     Empresa empresa ;
     Veterinario veterinario;
     String nombreUsuario; 
+    DatosAnimalesVeterinario datosAnimal ; 
     
-    public VeterinarioInterfaz(Empresa empresa, String nombreUsuario){
+    public VeterinarioInterfaz(Empresa empresa, String nombreUsuario) throws IOException{
         initComponents();
         this.nombreUsuario = nombreUsuario;
         this.empresa = empresa ;
         veterinario = empresa.darVeterinarioActual(nombreUsuario, empresa.darCodigo());
+        datosAnimal = new DatosAnimalesVeterinario( empresa.darCodigo());
         System.out.println("Entroooo");
+        AddComBox();
         
         
     }
+    boolean band = false;
+    
+    public void AddComBox(){
+        String []  a = {"Vaca Sana","Vaca Enferma","Toro Sano","Toro Enfermo","Animales Sanos","Animales Enfermos"};
+        for (String temp : a ){
+            jComboBox1.addItem(temp);
+            jComboBox3.addItem(temp);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -35,19 +52,12 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         ButtonSalir = new javax.swing.JButton();
         ButtonPerfil = new javax.swing.JButton();
-        
+        BGraficar = new javax.swing.JButton();
         ButtonEnfermedad = new javax.swing.JButton();
         ButtonMedica = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TextArea3 = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        TextArea1 = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        TextArea2 = new javax.swing.JTextArea();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox3 = new javax.swing.JComboBox<>();
-        ComBox2 = new javax.swing.JComboBox<>();
         Imagen2 = new javax.swing.JLabel();
         Imagen3 = new javax.swing.JLabel();
         Imagen1 = new javax.swing.JLabel();
@@ -62,6 +72,12 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(77,144,254));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        
+        
+        
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 265, 93, -1));
+        
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 550, 93, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interfaz/DataImage/logoMuuTexto.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 182));
@@ -88,6 +104,9 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ButtonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, 30, 30));
+        
+        
+        
         ButtonPerfil.setIcon(new javax.swing.ImageIcon("..\\Muu-Seguro\\src\\Interfaz\\DataImage\\perfil.png")); // NOI18N
         ButtonPerfil.setText("PERFIL");
         ButtonPerfil.setFont(new java.awt.Font("SansSerif", 0, 12));
@@ -175,45 +194,32 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 640));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        TextArea3.setColumns(20);
-        TextArea3.setRows(5);
-        jScrollPane2.setViewportView(TextArea3);
-
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 220, 140));
-
-        TextArea1.setColumns(20);
-        TextArea1.setRows(5);
-        jScrollPane3.setViewportView(TextArea1);
-
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 220, 140));
-
-        TextArea2.setColumns(20);
-        TextArea2.setRows(5);
-        jScrollPane4.setViewportView(TextArea2);
-
-        jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 220, 140));
-
+        
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 150, 30));
-
+        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 500, 150, 30));
+        
+        BGraficar.setText("Graficar ");
+        BGraficar.setFont(new java.awt.Font("SansSerif", 0, 12));
+        
+        BGraficar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BGraficarActionPerformed(evt);
+            }
+        });
+        
+        jPanel2.add(BGraficar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 550, 150, 30));
+        
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 150, 30));
+        jPanel2.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 150, 30));
 
-        ComBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComBox2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(ComBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 150, 30));
         jPanel2.add(Imagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 100, 100));
         jPanel2.add(Imagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 450, 100, 100));
         jPanel2.add(Imagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 100, 100));
@@ -266,11 +272,16 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
     private void ButtonMedicaActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_ButtonAgregarActionPerformed
         System.out.println("Entro a ---> Agregar enfermedades");
         // Se abre la ventana de Agregar / Eliminar Medicamentos
-        AgregarMedicamentos medicamentosVentana = new AgregarMedicamentos(empresa, nombreUsuario) ;
+        AgregarMedicamentos medicamentosVentana = new AgregarMedicamentos(empresa,nombreUsuario) ;
         medicamentosVentana.setVisible(true);
         this.setVisible(false);
     }
-
+    
+    private void BGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAgregarActionPerformed
+        System.out.println("Entro a ---> Gráficar");
+        band = true ; 
+        repaint();
+    }
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
@@ -279,10 +290,6 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox3ActionPerformed
-
-    private void ComBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComBox2ActionPerformed
 
     private void ButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSalirActionPerformed
         System.out.println("Cerrar Sesión");
@@ -296,22 +303,54 @@ public class VeterinarioInterfaz extends javax.swing.JFrame {
     private javax.swing.JButton ButtonMedica;
     private javax.swing.JButton ButtonPerfil;
     private javax.swing.JButton ButtonSalir;
-    private javax.swing.JComboBox<String> ComBox2;
     private javax.swing.JLabel Fondo;
     private javax.swing.JLabel Imagen1;
     private javax.swing.JLabel Imagen2;
     private javax.swing.JLabel Imagen3;
-    private javax.swing.JTextArea TextArea1;
-    private javax.swing.JTextArea TextArea2;
-    private javax.swing.JTextArea TextArea3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea textSetA;
+    private javax.swing.JButton BGraficar;
     // End of variables declaration//GEN-END:variables
+    
+    // Function to do the graphics
+    public void paint(Graphics g){
+        super.paint(g) ;
+        if (band){
+            //Take the values of the CSV
+
+            int valA = datosAnimal.getQuantityAnimals(jComboBox1.getSelectedItem().toString());
+            int valB = datosAnimal.getQuantityAnimals(jComboBox3.getSelectedItem().toString());
+            System.out.println("Cantidad *---> " + valA +" --> "+ valB );
+            //valA = 15 ; 
+            //valB = 25;
+            
+            int total = valA + valB ;
+            
+            int degreeValA=0;
+            int degreeValB=0; 
+            if(total>0){
+                degreeValA = ( valA * 360 ) / total;
+                degreeValB = (valB * 360 ) / total ;
+            }
+            
+            g.setFont( new Font( "SansSerif", Font.BOLD, 20 ) );
+            
+            // First Value
+            
+            g.setColor(new Color(246, 35, 54));
+            g.fillArc(500,150,200, 200,0,degreeValA);
+            g.fillRect(500, 420, 20, 20);
+            g.drawString(jComboBox1.getSelectedItem().toString(), 570, 435);
+            // Second Value
+            g.setColor(new Color(32, 63, 182));
+            g.fillArc(500,150,200, 200,degreeValA,degreeValB);
+            g.fillRect(500, 450, 20, 20);
+            g.drawString(jComboBox3.getSelectedItem().toString(), 570, 465 );
+            
+        }
+    }
 }

@@ -3,6 +3,9 @@ package Interfaz;
 import Mundo.Empresa;
 import javax.swing.JOptionPane;
 import Mundo.Veterinario;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author John Silva
@@ -290,18 +293,36 @@ public class PerfilVeterinarios extends javax.swing.JFrame {
                     empresa.darAdmin().modificarUsuario("Veterinario", Integer.parseInt(jTextFieldSalario.getText().substring(1, jTextFieldSalario.getText().length())), jLabelNombreUsuario.getText(), jPasswordFieldContraseña.getText(), jTextFieldFecha.getText());
                     this.setVisible(false);
                     empresa = new Empresa(jTextFieldCodigoEmpresa.getText());
-                    VeterinarioInterfaz ventana = new VeterinarioInterfaz(empresa,veterinario.darNombre());
-                    ventana.setVisible(true);
+                    VeterinarioInterfaz ventana;
+                    try {
+                        ventana = new VeterinarioInterfaz(empresa,veterinario.darNombre());
+                        ventana.setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(PerfilVeterinarios.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                 } else if (respuesta == 1) {
                     this.setVisible(false);
-                    VeterinarioInterfaz ventana = new VeterinarioInterfaz(empresa,veterinario.darNombre());
-                    ventana.setVisible(true);
+                    VeterinarioInterfaz ventana;
+                    try {
+                        ventana = new VeterinarioInterfaz(empresa,veterinario.darNombre());
+                        ventana.setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(PerfilVeterinarios.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                 }
             }
         } else {
             this.setVisible(false);
-            VeterinarioInterfaz ventana = new VeterinarioInterfaz(empresa,veterinario.darNombre());
-            ventana.setVisible(true);
+            VeterinarioInterfaz ventana;
+            try {
+                ventana = new VeterinarioInterfaz(empresa,veterinario.darNombre());
+                ventana.setVisible(true);
+            } catch (IOException ex) {
+                Logger.getLogger(PerfilVeterinarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
