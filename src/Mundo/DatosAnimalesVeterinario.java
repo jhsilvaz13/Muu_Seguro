@@ -74,8 +74,6 @@ public class DatosAnimalesVeterinario {
         System.out.println("MIRE !!!!");
         while ( (line = archivoEnfermedades.readLine()) != null  ){
             String [] values = line.split(",");
-           
-            
             String temp = values[1] + " - " + values[0];
             this.animales.add(temp);
             this.enfermedades.add(temp);            

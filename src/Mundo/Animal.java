@@ -61,14 +61,6 @@ public abstract class Animal {
         cantidadCarne=nCantidadCarne;
         nacimiento=new Fecha(fechaFormat);
     }
-    public void añadirEnfermedades(String cadena){
-        ArrayList<String>enfermedades= new ArrayList(Arrays.asList(cadena.split(";")));
-        for(int i=0; i<enfermedades.size();i++){
-            String[]valores=enfermedades.get(i).split(":");
-            Enfermedad aux=new Enfermedad(valores[0]);
-            Medicina aux2=new Medicina(valores[1]);
-        }
-    }
     public void hijos(){
         
     }

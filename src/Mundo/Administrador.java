@@ -184,17 +184,20 @@ public class Administrador {
     /*
     *Al utilizar este metodo se añade al .csv(Animales) un animal de tipo vaca o toro
     */
-    public void registrarAnimal(String numSerie, String nombre, String raza, String sexo,String nacimiento,int edad, float peso, int numCrias, float cantidadCarne, float cantidadLeche){
+    public void registrarAnimal(String numSerie, String nombre, String raza, String sexo,String nacimiento,
+                                int edad, float peso, int numCrias, float cantidadCarne, float cantidadLeche){
         if(nombre.equals("Opcional")){
             nombre="NULL";
         }
         try{
             FileWriter animales= new FileWriter(pathAnimals, true);
             PrintWriter registrar=new PrintWriter(animales);
-            registrar.println(sexo+","+numSerie+","+nombre+","+raza+","+nacimiento+","+edad+","+peso+","+numCrias+","+ cantidadCarne+","+cantidadLeche);
+            registrar.println(sexo+","+numSerie+","+nombre+","+raza+","
+                            +nacimiento+","+edad+","+peso+","+numCrias+","+ cantidadCarne+","+cantidadLeche);
             registrar.close();
         }catch(IOException ex){
-            JOptionPane.showMessageDialog(null, "Ups! Algo salió mal, inténtelo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ups! Algo salió mal, inténtelo de nuevo", 
+                                            "Error", JOptionPane.ERROR_MESSAGE);
         } 
         arregloVacas();
         arregloToros();
