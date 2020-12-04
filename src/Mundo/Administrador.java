@@ -149,16 +149,24 @@ public class Administrador {
                 String[] valores = contenidoArchivo.get(i).split(",");
                 java.time.LocalDate fechaNacimiento = java.time.LocalDate.parse(valores[4], java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 java.time.Period periodo = java.time.Period.between(fechaNacimiento.withDayOfMonth(1),java.time.LocalDate.now().withDayOfMonth(1));
-                
-                //Como obtener los meses?
                 if(periodo.toTotalMonths()%12==0 && periodo.toTotalMonths()!=0){
                     int edadAn=Integer.parseInt(valores[5]);
                     valores[5]=periodo.toTotalMonths()/12+"";
-                    contenidoArchivo.set(i, valores[0]+","+valores[1]+","+valores[2]+","+valores[3]+","+valores[4]+","+valores[5]+","+valores[6]+","+valores[7]+","+valores[8]+","+valores[9]);
+                    if(valores[0].equals("Ternera") || valores[0].equals("Ternero")){
+                        if(valores[0].equals("Ternera") && Integer.parseInt(valores[5])>0){
+                            contenidoArchivo.set(i,"Vaca"+","+valores[1]+","+valores[2]+","+valores[3]+","+valores[4]+","+valores[5]+","+valores[6]+","+valores[7]+","+valores[8]+","+valores[9]);
+                            String message="Se ha actualizado la edad de la ternera "+valores[1]+", ahora es la vaca "+valores[1]+".\nSi deseas actualizar sus datos dirgete a registros.";
+                            JOptionPane.showMessageDialog(null, message, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        if(valores[0].equals("Ternero") && Integer.parseInt(valores[5])>0){
+                            contenidoArchivo.set(i, "Toro"+","+valores[1]+","+valores[2]+","+valores[3]+","+valores[4]+","+valores[5]+","+valores[6]+","+valores[7]+","+valores[8]+","+valores[9]);
+                            String message="Se ha actualizado la edad del ternero "+valores[1]+", ahora es el toro "+valores[1]+".\nSi deseas actualizar sus datos dirgete a registros.";
+                            JOptionPane.showMessageDialog(null, message, "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }else{
+                        contenidoArchivo.set(i, valores[0]+","+valores[1]+","+valores[2]+","+valores[3]+","+valores[4]+","+valores[5]+","+valores[6]+","+valores[7]+","+valores[8]+","+valores[9]);
+                    }
                 }
-                
-                System.err.println("Nacimientos_:"+periodo.toTotalMonths());
-                
             }
             Files.write(path, contenidoArchivo);
             }catch(IOException ex){

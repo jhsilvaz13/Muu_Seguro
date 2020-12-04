@@ -12,7 +12,7 @@ public abstract class Animal {
     /*
     *
     */
-    protected String numeroSerie; 
+    private String numeroSerie; 
     /*
     *Nombre del animal, en caso de no tener 
     *se rellena como ---------
@@ -43,10 +43,7 @@ public abstract class Animal {
     */  
     private float cantidadCarne;
 
-    /*
-    *Arreglo de crias
-    */
-    ArrayList<Ternero> crias=new ArrayList<>();
+    
     /*
     *Diccionario de enfermedades:medicamentos
     */
@@ -61,9 +58,7 @@ public abstract class Animal {
         cantidadCarne=nCantidadCarne;
         nacimiento=new Fecha(fechaFormat);
     }
-    public void hijos(){
-        
-    }
+
     public String darNumeroSerie(){
         return numeroSerie;
     }
